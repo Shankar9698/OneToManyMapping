@@ -13,7 +13,7 @@ public class Student {
     int id;
     @Column(name = "sName")
     String name;
-    @OneToMany(mappedBy = "student")//mapped by which by which it is mapping here it is mapped by student table
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)//mapped by which by which it is mapping here it is mapped by student table
     List<Address> addressList;
 
     public Student(int id, String name, List<Address> addressList) {

@@ -18,10 +18,10 @@ public class App
     {
         System.out.println( "Hello World!" );
        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
-       Address a1=new Address();
+        Address a1=new Address();
         Address a2=new Address();
-       Student s1=new Student();
-       s1.setId(101);
+        Student s1=new Student();
+       s1.setId(203);
        s1.setName("shankar");
 
        a1.setId(101);
@@ -29,10 +29,13 @@ public class App
 
        a1.setCity("hyd");
        a2.setCity("bgl");
+
        a1.setCountry("ind");
        a2.setCountry(a1.getCountry());
+
        a1.setState("ts");
        a2.setState("ka");
+
        a1.setStudent(s1);
        a2.setStudent(s1);
         List<Address> add=Arrays.asList(a1,a2);
@@ -45,15 +48,12 @@ public class App
 
         Session session=sessionFactory.openSession();
         Transaction transaction=session.beginTransaction();
+        session.save(s1);// parent and child same operation then use cascade=Cascade.ALL
+        //else
+        //session.save(a1); and session.save(a2);
 
-        session.save(a2);
-        session.save(a1);
-        session.save(s1);
-        Address address=session.get(Address.class,101);
-       // System.out.println(address.getStudent().getName()+" : "+address.getStudent().getId());
-
-        transaction.commit();
-        System.out.println("One to many mapping succesfully done by directionally...");
+           transaction.commit();
+     //   System.out.println("One to many mapping succesfully done by directionally...");
         session.close();
        sessionFactory.close();
     }
