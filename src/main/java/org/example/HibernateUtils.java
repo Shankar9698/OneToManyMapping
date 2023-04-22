@@ -15,13 +15,15 @@ public class HibernateUtils {
             Configuration configuration=new Configuration();
             Properties properties=new Properties();
             properties.put(Environment.DRIVER,"com.mysql.cj.jdbc.Driver");
-            properties.put(Environment.URL,"jdbc:mysql://localhost:3306/my_db2");
+            properties.put(Environment.URL,"jdbc:mysql://localhost:3306/my_db3");
             properties.put(Environment.USER,"root");
             properties.put(Environment.PASS,"root");
             properties.put(Environment.DIALECT,"org.hibernate.dialect.MySQL8Dialect");
             properties.put(Environment.HBM2DDL_AUTO,"update");
             properties.put(Environment.SHOW_SQL,"true");
             configuration.setProperties(properties);
+            configuration.addAnnotatedClass(Student.class);
+            configuration.addAnnotatedClass(Address.class);
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             sessionFactory=configuration.buildSessionFactory(serviceRegistry);
         }
