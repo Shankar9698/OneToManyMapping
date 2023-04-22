@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Data
 @Entity
@@ -14,6 +15,8 @@ public class Address {
     String city;
     String state;
     String country;
+    @ManyToOne
+    Student student;
 
     public Address(int id, String city, String state, String country) {
         this.id = id;
